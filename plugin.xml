@@ -6,7 +6,7 @@
     <name>weibo</name>
     <description>weibo plugin for cordova</description>
     <js-module src="www/weibo.js" name="weibo">
-        <clobbers target="plugins.weibo" />
+        <clobbers target="window.weibo" />
     </js-module>
 
     <platform name="android">
