@@ -15,7 +15,7 @@
                 <param name="android-package" value="com.soundario.Weibo"/>
             </feature>
         </config-file>
-        <config-file parent="/*" target="AndroidManifest.xml">
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
           <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
                     android:configChanges="keyboardHidden|orientation"
                     android:windowSoftInputMode="adjustResize"

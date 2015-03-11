@@ -66,18 +66,14 @@ public class Weibo extends CordovaPlugin {
     }
 
     private void login(final CallbackContext context) {
-        if (this.isWeiboInstalled()) {
-            Activity activity = this.cordova.getActivity();
-            this.cordova.setActivityResultCallback(this);
-            activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mSsoHandler.authorizeClientSso(new AuthListener(context));
-                }
-            });
-        } else {
-            context.error(new ErrorMessage(WEIBO_NOT_INSTALLED, "Weibo not installed"));
-        }
+        Activity activity = this.cordova.getActivity();
+        this.cordova.setActivityResultCallback(this);
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mSsoHandler.authorize(new AuthListener(context));
+            }
+        });
     }
 
     @Override
