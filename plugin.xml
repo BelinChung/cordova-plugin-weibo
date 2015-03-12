@@ -2,9 +2,13 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.soundario.weibo"
-    version="0.1">
-    <name>weibo</name>
+    version="1.0.0">
+    <name>Weibo</name>
     <description>weibo plugin for cordova</description>
+    <author>BelinChung</author>
+    <license>MIT</license>
+    <keywords>cordova,weibo,sdk</keywords>
+    <repo>https://github.com/BelinChung/cordova-plugin-weibo</repo>
     <js-module src="www/weibo.js" name="weibo">
         <clobbers target="window.weibo" />
     </js-module>
