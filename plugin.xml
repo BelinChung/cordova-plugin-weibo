@@ -50,8 +50,11 @@
         <source-file src="src/ios/weibo.m" />
         <source-file src="src/ios/libWeiboSDK.a" framework="true" />
         <resource-file src="src/ios/WeiboSDK.bundle" />
-        <framework src="QuartzCore.framework" />
-        <framework src="Security.framework" />
-        <framework src="ImageIO.framework" />
+        
+        <framework src="QuartzCore.framework" weak="true"/>
+        <framework src="Security.framework" weak="true"/>
+        <framework src="ImageIO.framework" weak="true"/>
+        <framework src="SystemConfiguration.framework" weak="true" />
+        <framework src="Security.framework" weak="true" />        
     </platform>
 </plugin>
