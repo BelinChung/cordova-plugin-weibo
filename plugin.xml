@@ -23,7 +23,8 @@
           <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
                     android:configChanges="keyboardHidden|orientation"
                     android:windowSoftInputMode="adjustResize"
-                    android:exported="false" >
+                    android:exported="false" 
+                    android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
           </activity>
         </config-file>
         <source-file src="src/android/Weibo.java" target-dir="src/com/soundario" />
