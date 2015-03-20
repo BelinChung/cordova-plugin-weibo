@@ -42,6 +42,9 @@ public class Weibo extends CordovaPlugin {
             } else if (action.equals("login")) {
                 this.login(context);
                 result = true;
+            } else if (action.equals("isInstalled")) {
+                this.checkWeibo(context);
+                result = true;
             }
         } catch (Exception e) {
             e.printStackTrace();

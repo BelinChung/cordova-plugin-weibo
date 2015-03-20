@@ -80,6 +80,14 @@
 
 }
 
+- (void)isInstalled:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult *result;
+
+    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:[WeiboSDK isWeiboAppInstalled]];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
+
 
 - (void)didReceiveWeiboResponse:(WBBaseResponse *)response
 {

@@ -13,5 +13,10 @@ module.exports = {
 		exec(function(r){
 			onSuccess(r);
 		},onFail, "weibo", "login", []);
-	}
+	},
+    isInstalled: function(onSuccess, onFail) {
+        exec(function(r){
+            onSuccess(!!r);
+        },onFail, "weibo", "isInstalled", []);
+    }
 }

@@ -55,9 +55,13 @@ Android 暂时无需修改任何配置或代码
 
     window.weibo.init(appKey, redirectURI, onSuccess, onFail)
 
-微博SSO授权登录(未安装将使用 Web 授权)
+微博 SSO 授权登录(未安装将使用 Web 授权)
 
     window.weibo.login(onSuccess, onFail)
+
+判断是否安装微博客户端
+
+    window.weibo.isInstalled(onSuccess, onFail)
 
 
 ### Quick Example

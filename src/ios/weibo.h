@@ -25,6 +25,7 @@
 
 - (void)init: (CDVInvokedUrlCommand* )command;
 - (void)login:(CDVInvokedUrlCommand*)command;
+- (void)isInstalled:(CDVInvokedUrlCommand*)command;
 
 @property NSString* appKey;
 @property NSString* redirectURI;
