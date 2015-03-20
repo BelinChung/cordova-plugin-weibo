@@ -51,10 +51,12 @@ Android 暂时无需修改任何配置或代码
 
 ### JavaScript API
 
-初始化 appKey 和 redirectURI
+初始化 appKey 和 redirectURI   
+
     window.weibo.init(appKey, redirectURI, onSuccess, onFail)
 
 微博SSO授权登录(未安装将使用 Web 授权)
+
     window.weibo.login(onSuccess, onFail)
 
 
