@@ -1,6 +1,6 @@
 {
-    "version": "1.0.0",
-    "name": "com.soundario.weibo",
+    "version": "1.1.0",
+    "name": "com.hiliaox.weibo",
     "cordova_name": "Weibo",
     "description": "weibo plugin for cordova",
     "platforms": [
