@@ -23,7 +23,10 @@
 @interface weibo : CDVPlugin
 {}
 
-
+- (void)init: (CDVInvokedUrlCommand* )command;
 - (void)login:(CDVInvokedUrlCommand*)command;
+
+@property NSString* appKey;
+@property NSString* redirectURI;
 
 @end

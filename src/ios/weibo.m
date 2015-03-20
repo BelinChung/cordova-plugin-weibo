@@ -38,16 +38,38 @@
 
 @implementation weibo
 
-- (void)login:(CDVInvokedUrlCommand*)command
+- (void)init:(CDVInvokedUrlCommand* )command
 {
-    NSLog(@"登陆");
+    CDVPluginResult *result;
+    NSString *message;
+    self.appKey = [self parseStringFromJS:command.arguments keyFromJS:@"appKey"];
+    self.redirectURI = [self parseStringFromJS:command.arguments keyFromJS:@"redirectURI"];
+    
+    if (!self.appKey)
+    {
+        message = @"appKey was null";
+        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:message];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return ;
+    }
 
+    NSLog(@"插件初始化，appKey: %@ ,redirectURI: %@.", self.appKey,
+    self.redirectURI);;
 
     //[WeiboSDK enableDebugMode:YES];
-    [WeiboSDK registerApp:@"请填写key"];
 
+    [WeiboSDK registerApp:self.appKey];
+    
+    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
+
+- (void)login:(CDVInvokedUrlCommand*)command
+{
+    NSLog(@"SSO登陆");
+    
     WBAuthorizeRequest *request = [WBAuthorizeRequest request];
-    request.redirectURI = @"https://api.weibo.com/oauth2/default.html";
+    request.redirectURI = self.redirectURI;
     request.scope = @"all";
     request.userInfo = @{@"SSO_From": @"CDVViewController",
                          @"Other_Info_1": [NSNumber numberWithInt:123],
@@ -55,8 +77,6 @@
                          @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
     [WeiboSDK sendRequest:request];
     self.pendingCommand = command;
-
-
 
 }
 
@@ -100,5 +120,32 @@
 
     }
 }
+
+# pragma mark -
+# pragma mark MISC
+# pragma mark -
+
+- (BOOL)existCommandArguments:(NSArray*)comArguments{
+    NSMutableArray *commandArguments=[[NSMutableArray alloc] initWithArray:comArguments];
+    if (commandArguments && commandArguments.count > 0) {
+        return TRUE;
+    }else{
+        return FALSE;
+    }
+}
+
+- (NSString*)parseStringFromJS:(NSArray*)commandArguments keyFromJS:(NSString*)key{
+    if([self existCommandArguments:commandArguments]){
+        NSString *value = [[commandArguments objectAtIndex:0] valueForKey:key];
+        if(value){
+            return [NSString stringWithFormat:@"%@",value];
+        }else{
+            return @"";
+        }
+    }else{
+        return @"";
+    }
+}
+
 
 @end

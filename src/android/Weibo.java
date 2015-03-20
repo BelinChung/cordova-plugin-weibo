@@ -1,4 +1,4 @@
-package com.soundario;
+package com.hiliaox;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -27,34 +27,28 @@ public class Weibo extends CordovaPlugin {
     
     private static final String TAG = "Cordova-Weibo-SSO";
 
+    private String appKey;
+
     private SsoHandler mSsoHandler = null;
 
     @Override
     public boolean execute(String action, JSONArray args,
             CallbackContext context) throws JSONException {
-        this.buildSsoHandler();
-        if (action.equals("login")) {
-            this.login(context);
-            return true;
-        } else if (action.equals("isInstalled")) {
-            this.checkWeibo(context);
-            return true;
+        boolean result = false;
+        try {
+            if (action.equals("init")) {
+                this.init(args, context);
+                result = true;
+            } else if (action.equals("login")) {
+                this.login(context);
+                result = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            context.error(new ErrorMessage(10000,e.getMessage()));
+            result = false;
         }
-        return false;
-    }
-
-    private void buildSsoHandler() {
-        Activity activity = this.cordova.getActivity();
-
-        String key = "请填写key";
-        // redirect_url and scope can be optional
-        String url = "https://api.weibo.com/oauth2/default.html";
-        String scope = "email,direct_messages_read,direct_messages_write,"
-+ "friendships_groups_read,friendships_groups_write,statuses_to_me_read," + "follow_app_official_microblog," + "invitation_write";
-
-        AuthInfo authInfo = new AuthInfo(activity, key, url, scope);
-
-        this.mSsoHandler = new SsoHandler(activity, authInfo);
+        return result;
     }
 
     private void checkWeibo(final CallbackContext context) {
@@ -65,7 +59,19 @@ public class Weibo extends CordovaPlugin {
         return mSsoHandler != null && mSsoHandler.isWeiboAppInstalled();
     }
 
-    private void login(final CallbackContext context) {
+    public void init(JSONArray json, final CallbackContext context) {
+        appKey = getData(json, "appKey");
+        String redirectURI = getData(json, "redirectURI");
+        String scope = "all";
+        
+        Activity activity = this.cordova.getActivity();
+
+        AuthInfo authInfo = new AuthInfo(activity, appKey, redirectURI, scope);
+
+        this.mSsoHandler = new SsoHandler(activity, authInfo);    
+    }
+
+    public void login(final CallbackContext context) {
         Activity activity = this.cordova.getActivity();
         this.cordova.setActivityResultCallback(this);
         activity.runOnUiThread(new Runnable() {
@@ -74,6 +80,30 @@ public class Weibo extends CordovaPlugin {
                 mSsoHandler.authorize(new AuthListener(context));
             }
         });
+    }
+
+    public static JSONObject getObjectFromArray(JSONArray jsonArray,
+            int objectIndex) {
+        JSONObject jsonObject = null;
+        if (jsonArray != null && jsonArray.length() > 0) {
+            try {
+                jsonObject = new JSONObject(jsonArray.get(objectIndex)
+                        .toString());
+            } catch (JSONException e) {
+
+            }
+        }
+        return jsonObject;
+    }
+
+    public static String getData(JSONArray ary, String key) {
+        String result = null;
+        try {
+            result = getObjectFromArray(ary, 0).getString(key);
+        } catch (JSONException e) {
+
+        }
+        return result;
     }
 
     @Override

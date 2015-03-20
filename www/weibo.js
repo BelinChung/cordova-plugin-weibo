@@ -1,7 +1,15 @@
 var exec = require('cordova/exec');
 
 module.exports = {
-	login: function(onSuccess,onFail) {
+	init: function(appKey, redirectURI, onSuccess, onFail){
+		exec(function(r){
+			onSuccess(r);
+		},onFail, "weibo", "init",
+		[{"appKey": appKey,
+           "redirectURI": redirectURI
+        }]);
+	},
+	login: function(onSuccess, onFail) {
 		exec(function(r){
 			onSuccess(r);
 		},onFail, "weibo", "login", []);
