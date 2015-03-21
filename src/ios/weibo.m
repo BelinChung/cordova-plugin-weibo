@@ -80,6 +80,53 @@
 
 }
 
+- (void)share:(CDVInvokedUrlCommand*) command{
+    self.pendingCommand = command;
+    NSString *type = [self parseStringFromJS:command.arguments keyFromJS:@"type"];
+    if([type  isEqual: @"text"]){
+        [self sendTextContent];
+    }else if([type  isEqual: @"image"]){
+        [self sendImageContent];
+    }
+}
+
+-(void) sendTextContent{
+    NSString *text = [self parseStringFromJS:self.pendingCommand.arguments keyFromJS:@"text"];
+    WBMessageObject *message = [WBMessageObject message];
+    if([text length] > 0){
+        message.text = text;
+    }
+    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message];
+
+    [WeiboSDK sendRequest:request];
+}
+
+- (void)sendImageContent{
+    NSString *text = [self parseStringFromJS:self.pendingCommand.arguments keyFromJS:@"text"];
+    NSString *image_path = [self parseStringFromJS:self.pendingCommand.arguments keyFromJS:@"data"];
+    WBMessageObject *message = [WBMessageObject message];
+    if([text length] > 0){
+        message.text = text;
+    }
+    if([image_path length] > 0){
+        WBImageObject *wbimage = [WBImageObject object];
+        NSData *image;
+        if([image_path hasPrefix:@"http://"]){
+            image = [NSData dataWithContentsOfURL: [NSURL URLWithString:image_path]];
+        }
+        else if([image_path hasPrefix:@"data:"]){
+            image = [NSData dataWithContentsOfURL:[NSURL URLWithString:image_path]];
+        }else{
+            image = [NSData dataWithContentsOfFile: image_path];
+        }
+        wbimage.imageData = image;
+        message.imageObject = wbimage;
+    }
+    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message];
+
+    [WeiboSDK sendRequest:request];
+}
+
 - (void)isInstalled:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult *result;

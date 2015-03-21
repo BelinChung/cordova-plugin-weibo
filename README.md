@@ -63,6 +63,10 @@ Android 暂时无需修改任何配置或代码
 
     window.weibo.isInstalled(onSuccess, onFail)
 
+分享图文信息到微博
+
+    window.weibo.share(args,onSuccess, onFail)
+
 
 ### Quick Example
 
@@ -73,6 +77,16 @@ $$('#wbLoginBtn').on('click',function(){
 	window.weibo.login(function (res) {
 	    console.log(res);
 	});
+})
+
+$$('#wbShareBtn').on('click',function(){
+    window.weibo.share({
+        type: 'image',
+        data: 'http://ww3.sinaimg.cn/large/77565b1bjw1eqd6s01q6ej20c80c80t4.jpg',
+        text: 'test my plugin'
+    },function(res){
+        console.log(res);
+    });
 })
 ```
 

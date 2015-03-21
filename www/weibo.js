@@ -14,6 +14,11 @@ module.exports = {
 			onSuccess(r);
 		},onFail, "weibo", "login", []);
 	},
+    share: function(args,onSuccess, onFail) {
+        exec(function(r){
+            onSuccess(r);
+        },onFail, "weibo", "share", [args]);
+    },
     isInstalled: function(onSuccess, onFail) {
         exec(function(r){
             onSuccess(!!r);
