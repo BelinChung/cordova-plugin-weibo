@@ -28,10 +28,14 @@
           </activity>
         </config-file>
         <source-file src="src/android/Weibo.java" target-dir="src/com/hiliaox" />
-        <source-file src="src/android/weibosdkcore_v3.0.1.jar" target-dir="libs" framework="true" />
-        <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/armeabi-v7a" />
-        <source-file src="src/android/libs/mips/libweibosdkcore.so" target-dir="libs/mips" />
-        <source-file src="src/android/libs/x86/libweibosdkcore.so" target-dir="libs/x86" />
+        <source-file src="src/android/weibosdkcore_v3.1.1.jar" target-dir="libs" framework="true" />
+        <source-file src="src/android/libs/arm64-v8a/libweibosdkcore.so" target-dir="libs/arme64-v8a/" />
+        <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/armeabi/" />
+        <source-file src="src/android/libs/armeabi-v7a/libweibosdkcore.so" target-dir="libs/armeabi-v7a/" />
+        <source-file src="src/android/libs/mips/libweibosdkcore.so" target-dir="libs/mips/" />
+        <source-file src="src/android/libs/mips64/libweibosdkcore.so" target-dir="libs/mips64/" />
+        <source-file src="src/android/libs/x86/libweibosdkcore.so" target-dir="libs/x86/" />
+        <source-file src="src/android/libs/x86_64/libweibosdkcore.so" target-dir="libs/x86_64/" />
     </platform>
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
@@ -39,22 +43,31 @@
                 <param name="ios-package" value="weibo"/>
             </feature>
         </config-file>
-        <header-file src="src/ios/WeiboSDK.h" />
         <header-file src="src/ios/WBHttpRequest.h" />
         <header-file src="src/ios/WBHttpRequest+WeiboUser.h" />
         <header-file src="src/ios/WBHttpRequest+WeiboShare.h" />
         <header-file src="src/ios/WBHttpRequest+WeiboToken.h" />
+        <header-file src="src/ios/WBHttpRequest+WeiboGame.h" />
         <header-file src="src/ios/WBSDKRelationshipButton.h" />
         <header-file src="src/ios/WBSDKCommentButton.h" />
         <header-file src="src/ios/WBSDKBasicButton.h" />
+        <header-file src="src/ios/WeiboSDK.h" />
+        <header-file src="src/ios/WeiboUser.h" />
         <header-file src="src/ios/weibo.h" />
         <source-file src="src/ios/weibo.m" />
-        <source-file src="src/ios/libWeiboSDK.a" framework="true" />
+        <source-file src="src/ios/libWeiboSDK.a" framework="true" compiler-flags="-objc"/>
         <resource-file src="src/ios/WeiboSDK.bundle" />
         
         <framework src="QuartzCore.framework" weak="true"/>
         <framework src="Security.framework" weak="true"/>
         <framework src="ImageIO.framework" weak="true"/>
         <framework src="SystemConfiguration.framework" weak="true" />
+        <framework src="CoreTelephony.framework" weak="true" />
+        <framework src="CoreText.framework" weak="true" />
+        <framework src="UIKit.framework" weak="true" />
+        <framework src="Foundation.framework" weak="true" />
+        <framework src="CoreGraphics.framework" weak="true" />
+        <framework src="libz.dylib" weak="true" />
+        <framework src="libsqlite3.dylib" weak="true" />
     </platform>
 </plugin>
