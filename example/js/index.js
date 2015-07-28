@@ -60,13 +60,19 @@ var app = {
         })
     },
     shareText: function(){
-        window.weibo.share({
-            type: 'image',
-            data: 'http://ww3.sinaimg.cn/large/77565b1bjw1eqd6s01q6ej20c80c80t4.jpg',
-            text: 'test my plugin'
-        },function(res){
-            console.log(res);
-        });
+        window.weibo.isInstalled(function(status){
+            if(status){
+                window.weibo.share({
+                    type: 'image',
+                    data: 'http://ww3.sinaimg.cn/large/77565b1bjw1eqd6s01q6ej20c80c80t4.jpg',
+                    text: 'test my plugin'
+                },function(res){
+                    console.log(res);
+                });    
+            }else{
+                alert('请先安装微博客户端！');
+            }
+        })
     }
 };
 
