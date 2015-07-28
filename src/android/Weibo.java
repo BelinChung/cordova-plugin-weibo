@@ -111,7 +111,8 @@ public class Weibo extends CordovaPlugin {
 
         AuthInfo authInfo = new AuthInfo(activity, appKey, redirectURI, scope);
 
-        this.mSsoHandler = new SsoHandler(activity, authInfo);    
+        this.mSsoHandler = new SsoHandler(activity, authInfo);
+        context.success(1);
     }
 
     public void login(final CallbackContext context) {
