@@ -25,7 +25,7 @@ Cordova (PhoneGap) Plugin to connect to the native Weibo SDK
 #import "weibo.h"
 ```
 
-* 重写 `AppDelegate` 的 `handleOpenURL` 和 `openURL` 方法  
+* 重写 `AppDelegate` 的 `handleOpenURL` 和 `openURL` 方法  
 以前这两个方法有内容就直接添加如下方法中代码
 
 ```
@@ -89,6 +89,8 @@ $$('#wbShareBtn').on('click',function(){
     });
 })
 ```
+
+更详细的使用教程可 checkout `example` 目录代码替换 cordova 项目的 `www` 目录即可
 
 ### License
 
