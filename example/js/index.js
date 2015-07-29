@@ -44,7 +44,7 @@ var app = {
         parentElement.querySelector('.check-install').addEventListener('click', app.checkInstall, false);
         parentElement.querySelector('.sso-login').addEventListener('click', app.ssoLogin, false);
         parentElement.querySelector('.share-text').addEventListener('click', app.shareText, false);
-
+        parentElement.querySelector('.vcode-login').addEventListener('click', app.vcodeLogin, false);
     },
     checkInstall: function(){
         window.weibo.isInstalled(function(status){
@@ -72,6 +72,13 @@ var app = {
             }else{
                 alert('请先安装微博客户端！');
             }
+        })
+    },
+    vcodeLogin: function(){
+        window.weibo.vcodeLogin("tetetete",function(res){
+            alert('授权成功！\n phone_number' + res.phone_number);
+        },function(err){
+            alert('授权失败！');
         })
     }
 };

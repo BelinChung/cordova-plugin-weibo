@@ -57,6 +57,9 @@ public class Weibo extends CordovaPlugin {
             } else if (action.equals("login")) {
                 this.login(context);
                 result = true;
+            } else if (action.equals("vcodeLogin")) {
+                this.vcodeLogin(args, context);
+                result = true;
             } else if (action.equals("isInstalled")) {
                 this.checkWeibo(context);
                 result = true;
@@ -81,7 +84,7 @@ public class Weibo extends CordovaPlugin {
 						} catch (JSONException e) {
 							context.error("JSON Exception");
 							e.printStackTrace();
-						}                   
+						}
                 	}
                 });
                 result = true;
@@ -122,6 +125,19 @@ public class Weibo extends CordovaPlugin {
             @Override
             public void run() {
                 mSsoHandler.authorize(new AuthListener(context));
+            }
+        });
+    }
+
+    public void vcodeLogin(JSONArray json, final CallbackContext context) {
+        final String title = getData(json, "title");
+
+        Activity activity = this.cordova.getActivity();
+        this.cordova.setActivityResultCallback(this);
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mSsoHandler.registerOrLoginByMobile(title, new AuthListener(context));
             }
         });
     }
@@ -249,6 +265,7 @@ public class Weibo extends CordovaPlugin {
                     res.put("token", accessToken.getToken());
                     res.put("expire_at", accessToken.getExpiresTime());
                     res.put("refresh_token",accessToken.getRefreshToken());
+                    res.put("phone_number",accessToken.getPhoneNum());
                     context.success(res);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);

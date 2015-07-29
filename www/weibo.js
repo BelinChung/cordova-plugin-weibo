@@ -14,6 +14,14 @@ module.exports = {
 			onSuccess(r);
 		},onFail, "weibo", "login", []);
 	},
+    vcodeLogin: function(title, onSuccess, onFail) {
+        title = title || "验证码登录";
+        exec(function(r){
+            onSuccess(r);
+        },onFail, "weibo", "vcodeLogin", [{
+            title: title
+        }]);
+    },
     share: function(args,onSuccess, onFail) {
         exec(function(r){
             onSuccess(r);

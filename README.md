@@ -59,6 +59,10 @@ Android 暂时无需修改任何配置或代码
 
     window.weibo.login(onSuccess, onFail)
 
+手机验证码注册/登录
+
+    window.weibo.vcodeLogin(args,onSuccess, onFail)
+
 判断是否安装微博客户端
 
     window.weibo.isInstalled(onSuccess, onFail)

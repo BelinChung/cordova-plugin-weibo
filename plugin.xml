@@ -20,12 +20,24 @@
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-          <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
-                    android:configChanges="keyboardHidden|orientation"
-                    android:windowSoftInputMode="adjustResize"
-                    android:exported="false" 
-                    android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-          </activity>
+            <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
+                      android:configChanges="keyboardHidden|orientation"
+                      android:windowSoftInputMode="adjustResize"
+                      android:exported="false"
+                      android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            </activity>
+            <activity android:name="com.sina.weibo.sdk.register.mobile.MobileRegisterActivity"
+                      android:configChanges="keyboardHidden|orientation"
+                      android:windowSoftInputMode="adjustResize"
+                      android:exported="false"
+                      android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            </activity>
+            <activity android:name="com.sina.weibo.sdk.register.mobile.SelectCountryActivity"
+                      android:configChanges="keyboardHidden|orientation"
+                      android:windowSoftInputMode="adjustResize"
+                      android:exported="false"
+                      android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            </activity>
         </config-file>
         <source-file src="src/android/Weibo.java" target-dir="src/com/hiliaox" />
         <source-file src="src/android/weibosdkcore_v3.1.1.jar" target-dir="libs" framework="true" />
