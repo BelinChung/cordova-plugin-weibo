@@ -265,7 +265,6 @@ public class Weibo extends CordovaPlugin {
                     res.put("token", accessToken.getToken());
                     res.put("expire_at", accessToken.getExpiresTime());
                     res.put("refresh_token",accessToken.getRefreshToken());
-                    res.put("phone_number",accessToken.getPhoneNum());
                     context.success(res);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
