@@ -45,6 +45,20 @@ Cordova (PhoneGap) Plugin to connect to the native Weibo SDK
 }
 ```
 
+3\. 对应用跳转的支持
+
+如果你需要用到微博的相关功能，如登陆，分享等。并且需要实现跳转到微博的功能，在iOS9系统中就需要在你的app的plist中添加下列键值对。否则在canOpenURL函数执行时，就会返回NO。了解详情请至[https://developer.apple.com/videos/wwdc/2015/?id=703](https://developer.apple.com/videos/wwdc/2015/?id=703)
+
+```
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>sinaweibohd</string>
+    <string>sinaweibo</string>
+    <string>weibosdk</string>
+    <string>weibosdk2.5</string>
+</array>
+```  
+
 ### Android
 
 Android 暂时无需修改任何配置或代码
@@ -58,10 +72,6 @@ Android 暂时无需修改任何配置或代码
 微博 SSO 授权登录(未安装将使用 Web 授权)
 
     window.weibo.login(onSuccess, onFail)
-
-手机验证码注册/登录
-
-    window.weibo.vcodeLogin(args,onSuccess, onFail)
 
 判断是否安装微博客户端
 
