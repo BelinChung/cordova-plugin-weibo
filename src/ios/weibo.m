@@ -164,13 +164,13 @@
 
         //success
         if(response.statusCode==0){
-            NSDictionary *info=[NSDictionary dictionaryWithObjectsAndKeys:[(WBAuthorizeResponse *)response userID],@"uid",[(WBAuthorizeResponse*)response accessToken],@"token", [(WBAuthorizeResponse*)response refreshToken],@"refresh_token", [(WBAuthorizeResponse*)response phoneNum],@"phone_number", nil];
+            NSDictionary *info=[NSDictionary dictionaryWithObjectsAndKeys:[(WBAuthorizeResponse *)response userID],@"uid",[(WBAuthorizeResponse*)response accessToken],@"token", [(WBAuthorizeResponse*)response refreshToken],@"refresh_token", nil];
 
             CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:info];
             [self.commandDelegate sendPluginResult:result
                                         callbackId:self.pendingCommand.callbackId];
 
-            NSLog([NSString stringWithFormat:@"认证结果：statusCode:%d userId：%@  accessToken：%@ refreshToke：%@ phoneNumber：%@",response.statusCode,[(WBAuthorizeResponse *)response userID],[(WBAuthorizeResponse *)response accessToken],[(WBAuthorizeResponse *)response refreshToken],[(WBAuthorizeResponse *)response phoneNum]]);
+            NSLog([NSString stringWithFormat:@"认证结果：statusCode:%d userId：%@  accessToken：%@ refreshToke：%@",response.statusCode,[(WBAuthorizeResponse *)response userID],[(WBAuthorizeResponse *)response accessToken],[(WBAuthorizeResponse *)response refreshToken]]);
 
 
         }else{
