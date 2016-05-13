@@ -98,6 +98,6 @@ $$('#wbShareBtn').on('click',function(){
 
 ### License
 
-Copyright (c) 2015 Belin Chung. MIT Licensed, see [LICENSE] for details.
+Copyright (c) 2015 - 2016 Belin Chung. MIT Licensed, see [LICENSE] for details.
 
 [LICENSE]:https://github.com/BelinChung/cordova-plugin-weibo/blob/master/LICENSE.md
