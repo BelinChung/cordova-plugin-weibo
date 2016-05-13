@@ -60,6 +60,7 @@
         <header-file src="src/ios/WBHttpRequest+WeiboShare.h" />
         <header-file src="src/ios/WBHttpRequest+WeiboToken.h" />
         <header-file src="src/ios/WBHttpRequest+WeiboGame.h" />
+        <header-file src="src/ios/WeiboSDK+Statistics.h" />
         <header-file src="src/ios/WBSDKRelationshipButton.h" />
         <header-file src="src/ios/WBSDKCommentButton.h" />
         <header-file src="src/ios/WBSDKBasicButton.h" />
