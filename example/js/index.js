@@ -56,7 +56,11 @@ var app = {
         window.weibo.login(function(res){
             alert('授权成功！\n uid: ' + res.uid + '\n access_token: ' + res.token + '\n refresh_token: ' + res.refresh_token);
         },function(err){
-            alert('授权失败！');
+            if(err === 'cancel') {
+                alert('用户取消授权')
+            } else {
+                alert('授权失败');
+            }
         })
     },
     shareText: function(){

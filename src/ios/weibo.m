@@ -181,29 +181,33 @@
     }
     else if ([response isKindOfClass:WBAuthorizeResponse.class])
     {
+        switch (response.statusCode) {
+           case WeiboSDKResponseStatusCodeSuccess:
+               {
+                        NSDictionary *info=[NSDictionary dictionaryWithObjectsAndKeys:[(WBAuthorizeResponse *)response userID],@"uid",[(WBAuthorizeResponse*)response accessToken],@"token", [(WBAuthorizeResponse*)response refreshToken],@"refresh_token", nil];
 
+                        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:info];
+                        [self.commandDelegate sendPluginResult:result
+                                                    callbackId:self.pendingCommand.callbackId];
 
-        //success
-        if(response.statusCode==0){
-            NSDictionary *info=[NSDictionary dictionaryWithObjectsAndKeys:[(WBAuthorizeResponse *)response userID],@"uid",[(WBAuthorizeResponse*)response accessToken],@"token", [(WBAuthorizeResponse*)response refreshToken],@"refresh_token", nil];
-
-            CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:info];
-            [self.commandDelegate sendPluginResult:result
-                                        callbackId:self.pendingCommand.callbackId];
-
-            NSLog([NSString stringWithFormat:@"认证结果：statusCode:%d userId：%@  accessToken：%@ refreshToke：%@",response.statusCode,[(WBAuthorizeResponse *)response userID],[(WBAuthorizeResponse *)response accessToken],[(WBAuthorizeResponse *)response refreshToken]]);
-
-
-        }else{
-            //error
-            CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-            [self.commandDelegate sendPluginResult:result
-                                        callbackId:self.pendingCommand.callbackId];
-        }
-
-
-
-        self.pendingCommand = nil;
+                        NSLog([NSString stringWithFormat:@"认证结果：statusCode:%d userId：%@  accessToken：%@ refreshToke：%@",response.statusCode,[(WBAuthorizeResponse *)response userID],[(WBAuthorizeResponse *)response accessToken],[(WBAuthorizeResponse *)response refreshToken]]);
+               }
+               break;
+           case WeiboSDKResponseStatusCodeUserCancel:
+               {
+                   CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"cancel"];
+                   [self.commandDelegate sendPluginResult:result
+                                               callbackId:self.pendingCommand.callbackId];
+               }
+               break;
+           default:
+               {
+                   CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"error"];
+                   [self.commandDelegate sendPluginResult:result
+                                               callbackId:self.pendingCommand.callbackId];
+               }
+               break;
+       }
 
     }
 }
