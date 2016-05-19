@@ -153,10 +153,31 @@
 
     if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
     {
-        //NSString *title = @"发送结果";
-        //NSString *message = [NSString stringWithFormat:@"响应状态: %d\n响应UserInfo数据: %@\n原请求UserInfo数据: %@",(int)response.statusCode, response.userInfo, response.requestUserInfo];
 
-
+        switch (response.statusCode) {
+           case WeiboSDKResponseStatusCodeSuccess:
+               {
+                   CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"success"];
+                   [self.commandDelegate sendPluginResult:result
+                                               callbackId:self.pendingCommand.callbackId];
+               }
+               break;
+           case WeiboSDKResponseStatusCodeUserCancel:
+               {
+                   CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"cancel"];
+                   [self.commandDelegate sendPluginResult:result
+                                               callbackId:self.pendingCommand.callbackId];
+               }
+               break;
+           default:
+               {
+                   CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"error"];
+                   [self.commandDelegate sendPluginResult:result
+                                               callbackId:self.pendingCommand.callbackId];
+               }
+               break;
+       }
+       
     }
     else if ([response isKindOfClass:WBAuthorizeResponse.class])
     {

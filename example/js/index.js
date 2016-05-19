@@ -67,7 +67,13 @@ var app = {
                     data: 'http://ww3.sinaimg.cn/large/77565b1bjw1eqd6s01q6ej20c80c80t4.jpg',
                     text: 'test my plugin'
                 },function(res){
-                    console.log(res);
+                    alert('发送成功');
+                },function(res){
+                    if(res === 'cancel') {
+                        alert('用户取消分享')
+                    } else {
+                        alert('发送失败');
+                    }
                 });    
             }else{
                 alert('请先安装微博客户端！');
