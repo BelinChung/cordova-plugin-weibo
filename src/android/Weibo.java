@@ -40,11 +40,11 @@ public class Weibo extends CordovaPlugin {
     
     private static final String TAG = "Cordova-Weibo-SSO";
 
-    private String appKey;
-
     private SsoHandler mSsoHandler = null;
-    
-    private IWeiboShareAPI mWeiboShareAPI = null;
+
+    public static CallbackContext currentCallbackContext;
+    public static String appKey;
+    public static IWeiboShareAPI mWeiboShareAPI = null;
 
     @Override
     public boolean execute(String action, final JSONArray args,
@@ -67,25 +67,26 @@ public class Weibo extends CordovaPlugin {
                 final Weibo me = this;
                 cordova.getThreadPool().execute(new Runnable() {
                     public void run() {
-                    	try {
-							JSONObject cfg = args.getJSONObject(0);
-							if (cfg.getString("type").equals("text")) {
-								me.sendText(cfg.getString("text"));
-							} else if (cfg.getString("type").equals("image")) {
-								me.sendImage(cfg.getString("data"),
-										cfg.getString("text"));
-							}
-						} catch (MalformedURLException e) {
-							context.error("JSON Exception");
-							e.printStackTrace();
-						} catch (IOException e) {
-							context.error("JSON Exception");
-							e.printStackTrace();
-						} catch (JSONException e) {
-							context.error("JSON Exception");
-							e.printStackTrace();
-						}
-                	}
+                        try {
+                            currentCallbackContext = context;
+                            JSONObject cfg = args.getJSONObject(0);
+                            if (cfg.getString("type").equals("text")) {
+                                me.sendText(cfg.getString("text"));
+                            } else if (cfg.getString("type").equals("image")) {
+                                me.sendImage(cfg.getString("data"),
+                                        cfg.getString("text"));
+                            }
+                        } catch (MalformedURLException e) {
+                            context.error("JSON Exception");
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            context.error("JSON Exception");
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            context.error("JSON Exception");
+                            e.printStackTrace();
+                        }
+                    }
                 });
                 result = true;
             }
@@ -284,8 +285,8 @@ public class Weibo extends CordovaPlugin {
 
         @Override
         public void onCancel() {
-            String message = "authorize cancelled";
-            context.error(new ErrorMessage(WEIBO_AUTHORIZE_CANCELED, message));
+            String message = "cancel";
+            context.error(message);
             Log.i(TAG, message);
         }
     }
