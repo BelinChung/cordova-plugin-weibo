@@ -51,7 +51,7 @@
         <source-file src="src/android/Weibo.java" target-dir="src/com/hiliaox" />
         <source-file src="src/android/WeiboShareCallback.java" target-dir="src/com/hiliaox" />
         <source-file src="src/android/weiboSDKCore_3.1.4.jar" target-dir="libs" framework="true" />
-        <source-file src="src/android/libs/arm64-v8a/libweibosdkcore.so" target-dir="libs/arme64-v8a/" />
+        <source-file src="src/android/libs/arm64-v8a/libweibosdkcore.so" target-dir="libs/arm64-v8a/" />
         <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/armeabi/" />
         <source-file src="src/android/libs/armeabi-v7a/libweibosdkcore.so" target-dir="libs/armeabi-v7a/" />
         <source-file src="src/android/libs/mips/libweibosdkcore.so" target-dir="libs/mips/" />
